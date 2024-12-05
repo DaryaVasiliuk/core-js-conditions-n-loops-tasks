@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,15 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = a;
+  if (b > max) {
+    max = b;
+  }
+  if (c > max) {
+    max = c;
+  }
+  return max;
 }
 
 /**
@@ -82,8 +89,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  return a === b || b === c || a === c;
 }
 
 /**
@@ -100,8 +110,25 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let remaining = num;
+  const rnum = [
+    { value: 10, numeral: 'X' },
+    { value: 9, numeral: 'IX' },
+    { value: 5, numeral: 'V' },
+    { value: 4, numeral: 'IV' },
+    { value: 1, numeral: 'I' },
+  ];
+  let result = '';
+
+  for (let i = 0; i < rnum.length; i += 1) {
+    while (remaining >= rnum[i].value) {
+      result += rnum[i].numeral;
+      remaining -= rnum[i].value;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -119,8 +146,62 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const str = numberStr[i];
+    let word = '';
+
+    switch (str) {
+      case '1':
+        word = 'one';
+        break;
+      case '2':
+        word = 'two';
+        break;
+      case '3':
+        word = 'three';
+        break;
+      case '4':
+        word = 'four';
+        break;
+      case '5':
+        word = 'five';
+        break;
+      case '6':
+        word = 'six';
+        break;
+      case '7':
+        word = 'seven';
+        break;
+      case '8':
+        word = 'eight';
+        break;
+      case '9':
+        word = 'nine';
+        break;
+      case '0':
+        word = 'zero';
+        break;
+      case '-':
+        word = 'minus';
+        break;
+      case '.':
+      case ',':
+        word = 'point';
+        break;
+      default:
+        break;
+    }
+
+    if (word) {
+      if (result) {
+        result += ' ';
+      }
+      result += word;
+    }
+  }
+  return result;
 }
 
 /**
@@ -135,8 +216,18 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let length = 0;
+  while (str[length] !== undefined) {
+    length += 1;
+  }
+
+  for (let i = 0; i < length / 2; i += 1) {
+    if (str[i] !== str[length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -153,8 +244,17 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let length = 0;
+  while (str[length] !== undefined) {
+    length += 1;
+  }
+  for (let i = 0; i < length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +272,22 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let currentNum = num;
+
+  if (currentNum < 0) {
+    currentNum = -currentNum;
+  }
+
+  while (currentNum > 0) {
+    const currentDigit = currentNum % 10;
+    if (currentDigit === digit) {
+      return true;
+    }
+    currentNum = Math.floor(currentNum / 10);
+  }
+
+  return false;
 }
 
 /**
